@@ -1,3 +1,9 @@
+:root {
+  --container-width: 80vw;
+  --container-min-width: 500px;
+  --container-max-width: 1500px;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -10,14 +16,13 @@ body {
   display: flex;
   justify-content: center;
 
-  width: 80vw;
-  min-width: 600px;
-  max-width: 1500px;
+  width: var(--container-width);
+  min-width: var(--container-min-width);
+  max-width: var(--container-max-width);
 
-  height: calc(80vw / 2);
-  min-height: 400px;
-  max-height: 1000px;
- 
+  height: calc(var(--container-width) / 2);
+  min-height: calc(var(--container-min-width) / 2);
+  max-height: calc(var(--container-max-width) / 2) ;
 }
 
 .left-thumbnail-container {
