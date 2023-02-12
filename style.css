@@ -6,12 +6,6 @@ body {
   height: 90vh;
 }
 
-.content-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .main-container {
   display: flex;
   justify-content: center;

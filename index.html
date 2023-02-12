@@ -21,53 +21,43 @@
 </head>
 <body>
 
-  <!-- CONTENITORE PRINCIPALE -->
-  <div id="app" class="content-container">
+  <!-- CONTENITORI PRINCIPALI -->
+  <div id="app">
+  <div class="main-container" @mouseover="hover = true" @mouseleave="hover = false">
+    <!-- CONTENITORE FILM PRINCIPALE -->
+    <div class="left-thumbnail-container big-image">
+      <img :src="films[currentIndex].image" alt="">
 
-    <!-- CONTENITORE IMMAGINE PRINCIPALE E MINIATURE -->
-    <div class="main-container">
-
-      <!-- CONTENITORE FILM PRINCIPALE -->
-      <div class="left-thumbnail-container big-image">
-        <img :src="films[currentIndex].image" alt="">
-
-        <!-- CONTENITORE DEL TESTO DEL FILM PRINCIPALE -->
-        <div class="text-container">
-          <h2>{{ films[currentIndex].title }}</h2>
-          <p>{{ films[currentIndex].text }}</p>
-        </div>
+      <!-- CONTENITORE DEL TESTO DEL FILM PRINCIPALE -->
+      <div class="text-container">
+        <h2>{{ films[currentIndex].title }}</h2>
+        <p>{{ films[currentIndex].text }}</p>
       </div>
+    </div>
 
-      <!-- CONTENITORE MINIATURE -->
-      <div class="right-thumbnail-container">
-        <span class="arrow arrow-up" @click="prev()">&#10095;</span>
-        <span class="arrow arrow-down" @click="next()">&#10095;</span>
+    <!-- CONTENITORE MINIATURE -->
+    <div class="right-thumbnail-container">
+      <span class="arrow arrow-up" @click="prev()">&#10095;</span>
+      <span class="arrow arrow-down" @click="next()">&#10095;</span>
+      
+      <!-- GENERAZIONE DELLE MINIATURE -->
+      <!-- 
+        v-for="(film, index) in films" è la direttiva che ci permette di iterare sull'array films e di generare un div per ogni oggetto al suo interno. film rappresenta l'oggetto corrente, mentre index rappresenta l'indice dell'oggetto corrente nell'array.
+
+        :key="index" è una proprietà obbligatoria quando si utilizza v-for per generare elementi dinamici. In questo caso, stiamo assegnando come chiave l'indice dell'oggetto corrente.
+
+        class="thumbnail" è una classe CSS che verrà assegnata a tutti i div generati.
+
+        :class="{ 'selected': currentIndex === index }" è una sintassi particolare di Vue.js che ci permette di aggiungere dinamicamente una classe CSS ai nostri elementi in base ad una condizione. In questo caso, stiamo controllando se currentIndex è uguale all'indice corrente. Se la condizione è vera, allora al div verrà assegnata la classe CSS selected (rendendo l'immagine non opaca), altrimenti no.
         
-        <!-- GENERAZIONE DELLE MINIATURE -->
-        <!-- 
-          v-for="(film, index) in films" è la direttiva che ci permette di iterare sull'array films e di generare un div per ogni oggetto al suo interno. film rappresenta l'oggetto corrente, mentre index rappresenta l'indice dell'oggetto corrente nell'array.
+        @click="currentIndex = index aggiorna currentIndex in base all'immagine cliccata, in questo modo visualizzare in grande l'immagine corrispondente.
+      -->
 
-          :key="index" è una proprietà obbligatoria quando si utilizza v-for per generare elementi dinamici. In questo caso, stiamo assegnando come chiave l'indice dell'oggetto corrente.
-
-          class="thumbnail" è una classe CSS che verrà assegnata a tutti i div generati.
-
-          :class="{ 'selected': currentIndex === index }" è una sintassi particolare di Vue.js che ci permette di aggiungere dinamicamente una classe CSS ai nostri elementi in base ad una condizione. In questo caso, stiamo controllando se currentIndex è uguale all'indice corrente. Se la condizione è vera, allora al div verrà assegnata la classe CSS selected (rendendo l'immagine non opaca), altrimenti no.
-          
-          @click="currentIndex = index aggiorna currentIndex in base all'immagine cliccata, in questo modo visualizzare in grande l'immagine corrispondente.
-        -->
-
-        <div v-for="(film, index) in films" :key="index" class="thumnail" :class="{ 'selected': currentIndex === index }" @click="currentIndex = index">
-          <img :src="film.image" alt="">
-        </div>
+      <div v-for="(film, index) in films" :key="index" class="thumnail" :class="{ 'selected': currentIndex === index }" @click="currentIndex = index">
+        <img :src="film.image" alt="">
       </div>
     </div>
-
-    <!-- CONTENITORE PULSANTI -->
-    <div class="button-container">
-      <button id="play">PLAY</button>
-      <button id="pause">PAUSE</button>
-      <button id="reverse">REVERSE</button>
-    </div>
+  </div>
   </div>
 </body>
 </html>

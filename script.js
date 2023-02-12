@@ -4,8 +4,12 @@ createApp({
     data() {
         return {
 
+            // Indice del film mostrato al caricamento della pacina    
             currentIndex: 0,
 
+            hover: false,
+
+            // Dati dei film da visualizzare
             films: [
                 {
                     image: 'img/01.webp',
@@ -33,7 +37,7 @@ createApp({
     },
 
     methods: {
-        
+
         // Mostra immagine precedente
         prev() {
             if(this.currentIndex == 0) {
@@ -55,9 +59,14 @@ createApp({
 
     created() {
 
-    },
-
-    mounted() {
-
-    }
+        let interval;
+    
+        // Avvia l'autoplay ogni 2 secondi al caricamento della pagina e si iterrompe se il cursore è sopra il contenuto
+        interval = setInterval(() => {
+          if (this.hover === false) {
+            this.next();
+          }
+        }, 2000);
+      },
+    
 }).mount("#app")
