@@ -2,32 +2,72 @@
 <html lang="en">
 <head>
 
+  <!-- META TAGS -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>js-array-objects-carousel</title>
+  
+  <!-- TITLE -->
+  <title>VUE SLIDER</title>
 
+  <!-- LINK CSS -->
   <link rel="stylesheet" href="style.css">
 
+  <!-- CND VUE JS -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- SCRIPT -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="main-container ">
-    <div class="left-thumbnail-container big-image"><img src="./img/01.webp" alt=""></div>
-    <div class="right-thumbnail-container">
-      <span class="arrow arrow-up prev">&#10095;</span>
-      <span class="arrow arrow-down next">&#10095;</span>
-      <div class="thumnail" id="img-01"><img src="./img/01.webp" alt=""></div>
-      <div class="thumnail" id="img-02"><img src="./img/02.webp" alt=""></div>
-      <div class="thumnail" id="img-03"><img src="./img/03.webp" alt=""></div>
-      <div class="thumnail" id="img-04"><img src="./img/04.webp" alt=""></div>
-      <div class="thumnail" id="img-05"><img src="./img/05.webp" alt=""></div>
+
+  <!-- CONTENITORE PRINCIPALE -->
+  <div id="app" class="content-container">
+
+    <!-- CONTENITORE IMMAGINE PRINCIPALE E MINIATURE -->
+    <div class="main-container">
+
+      <!-- CONTENITORE FILM PRINCIPALE -->
+      <div class="left-thumbnail-container big-image">
+        <img :src="films[currentIndex].image" alt="">
+
+        <!-- CONTENITORE DEL TESTO DEL FILM PRINCIPALE -->
+        <div class="text-container">
+          <h2>{{ films[currentIndex].title }}</h2>
+          <p>{{ films[currentIndex].text }}</p>
+        </div>
+      </div>
+
+      <!-- CONTENITORE MINIATURE -->
+      <div class="right-thumbnail-container">
+        <span class="arrow arrow-up" @click="prev()">&#10095;</span>
+        <span class="arrow arrow-down" @click="next()">&#10095;</span>
+        
+        <!-- GENERAZIONE DELLE MINIATURE -->
+        <!-- 
+          v-for="(film, index) in films" è la direttiva che ci permette di iterare sull'array films e di generare un div per ogni oggetto al suo interno. film rappresenta l'oggetto corrente, mentre index rappresenta l'indice dell'oggetto corrente nell'array.
+
+          :key="index" è una proprietà obbligatoria quando si utilizza v-for per generare elementi dinamici. In questo caso, stiamo assegnando come chiave l'indice dell'oggetto corrente.
+
+          class="thumbnail" è una classe CSS che verrà assegnata a tutti i div generati.
+
+          :class="{ 'selected': currentIndex === index }" è una sintassi particolare di Vue.js che ci permette di aggiungere dinamicamente una classe CSS ai nostri elementi in base ad una condizione. In questo caso, stiamo controllando se currentIndex è uguale all'indice corrente. Se la condizione è vera, allora al div verrà assegnata la classe CSS selected (rendendo l'immagine non opaca), altrimenti no.
+          
+          @click="currentIndex = index aggiorna currentIndex in base all'immagine cliccata, in questo modo visualizzare in grande l'immagine corrispondente.
+        -->
+
+        <div v-for="(film, index) in films" :key="index" class="thumnail" :class="{ 'selected': currentIndex === index }" @click="currentIndex = index">
+          <img :src="film.image" alt="">
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="button-container">
-    <button id="play">PLAY</button>
-    <button id="pause">PAUSE</button>
-    <button id="reverse">REVERSE</button>
+
+    <!-- CONTENITORE PULSANTI -->
+    <div class="button-container">
+      <button id="play">PLAY</button>
+      <button id="pause">PAUSE</button>
+      <button id="reverse">REVERSE</button>
+    </div>
   </div>
 </body>
 </html>

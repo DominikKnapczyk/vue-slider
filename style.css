@@ -6,6 +6,12 @@ body {
   height: 90vh;
 }
 
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
@@ -38,6 +44,11 @@ body {
   width: 100%;
   height: calc(100% /5);
   opacity: 0.5;
+  cursor: pointer;
+}
+
+.thumnail.selected {
+  opacity: 1;
 }
 
 img {
@@ -75,10 +86,6 @@ img {
   bottom: 0px;
 
   transform: rotate(90deg);
-}
-
-#img-01 {
-  opacity: 1;
 }
 
 #play {
